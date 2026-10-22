@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus Energy Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 25px;
+            background: #f2f6fa;
+            color: #222;
+        }
+        h1 { color: #14532d; }
+        .summary {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th { background: #dbeafe; }
+        .warning { color: #b91c1c; font-weight: bold; }
+        .normal { color: #166534; }
+    </style>
+</head>
+<body>
+    <h1>Smart Campus Energy Monitoring</h1>
+    <p>Daily electricity consumption and energy-saving targets.</p>
+
+    <div class="summary">
+        <h3>Campus Buildings</h3>
+        <p>Consumption is measured in kWh per day.</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Building</th>
+                <th>Consumption (kWh)</th>
+                <th>Target (kWh)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="energyTable"></tbody>
+    </table>
+
+    <script>
+        const buildings = [
+            { name: "Academic Block", usage: 120, target: 100 },
+            { name: "Library", usage: 85, target: 90 },
+            { name: "Hostel Block", usage: 110, target: 100 }
+        ];
+
+        const table = document.getElementById("energyTable");
+
+        buildings.forEach(b => {
+            const status = b.usage > 100
+                ? `<span class="warning">Warning: exceeds limit by ${b.usage - 100} kWh</span>`
+                : `<span class="normal">Normal</span>`;
+
+            table.innerHTML += `
+                <tr>
+                    <td>${b.name}</td>
+                    <td>${b.usage}</td>
+                    <td>${b.target}</td>
+                    <td>${status}</td>
+                </tr>`;
+        });
+    </script>
+</body>
+</html>
